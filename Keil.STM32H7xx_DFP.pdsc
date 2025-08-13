@@ -16,6 +16,11 @@
   <releases>
     <release version="4.1.1-dev">
       Active development ...
+      Device support:
+      - Shortened device family description
+      - Added Ddsp processor attribute
+      - Updated debug configuration files (MCU APBx Freeze registers)
+      - Removed startup attribute from memory bank 2
     </release>
     <release version="3.1.1" date="2023-07-04">
       Board Support:
@@ -303,16 +308,7 @@
       <algorithm name="CMSIS/Flash/STM32H7xx_MT25TL01G_DUAL.FLM"       start="0x90000000" size="0x08000000" RAMstart="0x20000000" RAMsize="0xFFF0"  default="0" />
 
       <description>
-The STM32H7 series now includes dual-core microcontrollers with Arm Cortex-M7 and Cortex-M4 cores able to run up to 480 MHz and 240 MHz respectively.
-Our single-core Cortex-M7 STM32H7 series also benefits from this frequency increase and can now run up to 480 MHz as well.
-Dual-core STM32H7 microcontrollers are available with an embedded SMPS for improved dynamic power efficiency.
-
-Extended temperature range support up to 125 C (*) (ambient) will be available for certain devices for use in harsh environments including industrial applications.
-
-STM32H7 devices embedding a crypto/hash processor support security services such as Secure Firmware Install and Secure Boot - Secure Firmware Upgrade allowing the installation of new application code in a secured manner.
-
-All the other features that have made single-core STM32H7 MCUs a success are still available in the dual-core versions.
-The STM32H7 series remains more than ever the microcontroller with an embedded Flash memory offering the highest performance on the market.
+High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L1 cache, DSP, DP-FPU, 1177 DMIPS at 550MHz.
       </description>
 
       <sequences>
@@ -636,7 +632,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H742'  **************************** -->
       <subFamily DsubFamily="STM32H742">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
 
         <debug svd="CMSIS/SVD/STM32H742.svd"/>
@@ -644,15 +640,15 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h743vi.pdf" title="STM32H742xI/G STM32H743xI/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -708,7 +704,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742AGIx'  ***************************** -->
         <device Dname="STM32H742AGIx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -716,7 +712,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742AIIx'  ***************************** -->
         <device Dname="STM32H742AIIx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -724,14 +720,14 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742BGTx'  ***************************** -->
         <device Dname="STM32H742BGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
           <feature type="QFP" n="208"/>
         </device>
 
         <!-- *************************  Device 'STM32H742BITx'  ***************************** -->
         <device Dname="STM32H742BITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="208"/>
         </device>
@@ -739,7 +735,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742IGKx'  ***************************** -->
         <device Dname="STM32H742IGKx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -747,7 +743,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742IGTx'  ***************************** -->
         <device Dname="STM32H742IGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -755,7 +751,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742IIKx'  ***************************** -->
         <device Dname="STM32H742IIKx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -763,7 +759,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742IITx'  ***************************** -->
         <device Dname="STM32H742IITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -771,7 +767,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742VGHx'  ***************************** -->
         <device Dname="STM32H742VGHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -779,7 +775,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742VGTx'  ***************************** -->
         <device Dname="STM32H742VGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -787,7 +783,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742VIHx'  ***************************** -->
         <device Dname="STM32H742VIHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -795,7 +791,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742VITx'  ***************************** -->
         <device Dname="STM32H742VITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -803,7 +799,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742XGHx'  ***************************** -->
         <device Dname="STM32H742XGHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="240"/>
         </device>
@@ -811,7 +807,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742XIHx'  ***************************** -->
         <device Dname="STM32H742XIHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="240"/>
         </device>
@@ -819,7 +815,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742ZGTx'  ***************************** -->
         <device Dname="STM32H742ZGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -827,7 +823,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H742ZITx'  ***************************** -->
         <device Dname="STM32H742ZITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -836,7 +832,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H743'  **************************** -->
       <subFamily DsubFamily="STM32H743">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
         <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H743.sdf"/>
         <debug svd="CMSIS/SVD/STM32H743.svd"/>
@@ -845,15 +841,15 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <book name="https://www.st.com/resource/en/datasheet/stm32h743vi.pdf" title="STM32H742xI/G STM32H743xI/G Data Sheet"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -908,7 +904,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743AGIx'  ***************************** -->
         <device Dname="STM32H743AGIx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -916,7 +912,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743AIIx'  ***************************** -->
         <device Dname="STM32H743AIIx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -924,7 +920,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743BGTx'  ***************************** -->
         <device Dname="STM32H743BGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="208"/>
         </device>
@@ -932,7 +928,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743BITx'  ***************************** -->
         <device Dname="STM32H743BITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="208"/>
         </device>
@@ -940,7 +936,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743IGKx'  ***************************** -->
         <device Dname="STM32H743IGKx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -948,7 +944,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743IGTx'  ***************************** -->
         <device Dname="STM32H743IGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="169"/>
         </device>
@@ -956,7 +952,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743IIKx'  ***************************** -->
         <device Dname="STM32H743IIKx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -964,7 +960,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743IITx'  ***************************** -->
         <device Dname="STM32H743IITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -972,7 +968,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743VGHx'  ***************************** -->
         <device Dname="STM32H743VGHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -980,7 +976,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743VGTx'  ***************************** -->
         <device Dname="STM32H743VGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -988,7 +984,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743VIHx'  ***************************** -->
         <device Dname="STM32H743VIHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -996,7 +992,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743VITx'  ***************************** -->
         <device Dname="STM32H743VITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -1004,7 +1000,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743XGHx'  ***************************** -->
         <device Dname="STM32H743XGHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="240"/>
         </device>
@@ -1012,7 +1008,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743XIHx'  ***************************** -->
         <device Dname="STM32H743XIHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="240"/>
         </device>
@@ -1020,7 +1016,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743ZGTx'  ***************************** -->
         <device Dname="STM32H743ZGTx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -1028,7 +1024,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H743ZITx'  ***************************** -->
         <device Dname="STM32H743ZITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -1036,7 +1032,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H753'  **************************** -->
       <subFamily DsubFamily="STM32H753">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
 
         <debug svd="CMSIS/SVD/STM32H753.svd"/>
@@ -1044,15 +1040,15 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h753vi.pdf" title="STM32H753 Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -1107,7 +1103,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753AIIx'  ***************************** -->
         <device Dname="STM32H753AIIx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -1115,7 +1111,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753BITx'  ***************************** -->
         <device Dname="STM32H753BITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="208"/>
         </device>
@@ -1123,7 +1119,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753IIKx'  ***************************** -->
         <device Dname="STM32H753IIKx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -1131,7 +1127,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753IITx'  ***************************** -->
         <device Dname="STM32H753IITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -1139,7 +1135,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753VIHx'  ***************************** -->
         <device Dname="STM32H753VIHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -1147,7 +1143,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753VITx'  ***************************** -->
         <device Dname="STM32H753VITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -1155,7 +1151,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753XIHx'  ***************************** -->
         <device Dname="STM32H753XIHx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="240"/>
         </device>
@@ -1163,7 +1159,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <!-- *************************  Device 'STM32H753ZITx'  ***************************** -->
         <device Dname="STM32H753ZITx">
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -1172,7 +1168,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H750'   *************************** -->
       <subFamily DsubFamily="STM32H750">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
 
         <debug svd="CMSIS/SVD/STM32H750.svd"/>
@@ -1180,15 +1176,15 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h750ib.pdf" title="STM32H750VB STM32H750IB STM32H750XB Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -1277,8 +1273,8 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H745' Dual Core  ****************** -->
       <subFamily DsubFamily="STM32H745">
-        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="480000000"/>
-        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Dclock="240000000"/>
+        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
+        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H745_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H745_CM4.svd"/>
         <compile Pname="CM7" Pdefine="CORE_CM7"/>
@@ -1293,28 +1289,26 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           The STM32H745 devices are dual processor devices:
         </description>
         <description Pname="CM7">
-          32-bit Arm Cortex-M7 core with doubleprecision FPU and L1 cache: 16 Kbytes of data and 16 Kbytes of instruction cache;
-          frequency up to 480 MHz, MPU, 1027 DMIPS/2.14 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M7 core with DP-FPU, DSP, L1 cache, frequency up to 480 MHz, MPU, 1027 DMIPS.
         </description>
         <description Pname="CM4">
-          32-bit Arm 32-bit Cortex-M4 core with FPU, Adaptive real-time accelerator (ART Accelerator) for internal Flash memory and external memories,
-          frequency up to 240 MHz, MPU, 300 DMIPS/1.25 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M4 core with FPU, DSP, ART Accelerator, frequency up to 240 MHz, MPU, 300 DMIPS.
         </description>
 
-        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 5] DBGSTBY_D2, [ 4] DBGSTOP_D2,  [ 3] DBGSLEEP_D2
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
-          __var DbgMCU_APB3_Fz2  = 0x00000000;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
-          __var DbgMCU_APB1L_Fz2 = 0x00000000;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
-          __var DbgMCU_APB2_Fz2  = 0x00000000;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
-          __var DbgMCU_APB4_Fz2  = 0x00000000;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
+          __var DbgMCU_APB3_Fz2  = 0x00000040;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E00BFF;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
+          __var DbgMCU_APB1L_Fz2 = 0x00E00BFF;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
+          __var DbgMCU_APB2_Fz2  = 0x20070003;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x000C1E80;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
+          __var DbgMCU_APB4_Fz2  = 0x000C1E80;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -1455,7 +1449,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile Pname="CM4" define="STM32H745xx"/>
 
          <memory Pname="CM7" name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory Pname="CM4" name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+         <memory Pname="CM4" name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
 
           <feature type="BGA" n="240"/>
         </device>
@@ -1485,8 +1479,8 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H755' Dual Core  ****************** -->
       <subFamily DsubFamily="STM32H755">
-        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="480000000"/>
-        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Dclock="240000000"/>
+        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
+        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H755_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H755_CM4.svd"/>
         <compile Pname="CM7" define="STM32H755xx" Pdefine="CORE_CM7"/>
@@ -1501,28 +1495,26 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           The STM32H755 devices are dual processor devices:
         </description>
         <description Pname="CM7">
-          32-bit Arm Cortex-M7 core with doubleprecision FPU and L1 cache: 16 Kbytes of data and 16 Kbytes of instruction cache;
-          frequency up to 480 MHz, MPU, 1027 DMIPS/2.14 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M7 core with DP-FPU, DSP, L1 cache, frequency up to 480 MHz, MPU, 1027 DMIPS.
         </description>
         <description Pname="CM4">
-          32-bit Arm 32-bit Cortex-M4 core with FPU, Adaptive real-time accelerator (ART Accelerator) for internal Flash memory and external memories,
-          frequency up to 240 MHz, MPU, 300 DMIPS/1.25 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M4 core with FPU, DSP, ART Accelerator, frequency up to 240 MHz, MPU, 300 DMIPS.
         </description>
 
-        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 5] DBGSTBY_D2, [ 4] DBGSTOP_D2,  [ 3] DBGSLEEP_D2
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
-          __var DbgMCU_APB3_Fz2  = 0x00000000;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
-          __var DbgMCU_APB1L_Fz2 = 0x00000000;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
-          __var DbgMCU_APB2_Fz2  = 0x00000000;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
-          __var DbgMCU_APB4_Fz2  = 0x00000000;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
+          __var DbgMCU_APB3_Fz2  = 0x00000040;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E00BFF;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
+          __var DbgMCU_APB1L_Fz2 = 0x00E00BFF;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
+          __var DbgMCU_APB2_Fz2  = 0x20070003;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x000C1E80;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
+          __var DbgMCU_APB4_Fz2  = 0x000C1E80;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -1624,8 +1616,8 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H747' Dual Core  ****************** -->
       <subFamily DsubFamily="STM32H747">
-        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="480000000"/>
-        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Dclock="240000000"/>
+        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
+        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
         <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H747.sdf"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H747_CM7.svd"/>
@@ -1642,28 +1634,26 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           The STM32H747 devices are dual processor devices:
         </description>
         <description Pname="CM7">
-          32-bit Arm Cortex-M7 core with doubleprecision FPU and L1 cache: 16 Kbytes of data and 16 Kbytes of instruction cache;
-          frequency up to 480 MHz, MPU, 1027 DMIPS/2.14 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M7 core with DP-FPU, DSP, L1 cache, frequency up to 480 MHz, MPU, 1027 DMIPS.
         </description>
         <description Pname="CM4">
-          32-bit Arm 32-bit Cortex-M4 core with FPU, Adaptive real-time accelerator (ART Accelerator) for internal Flash memory and external memories,
-          frequency up to 240 MHz, MPU, 300 DMIPS/1.25 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M4 core with FPU, DSP, ART Accelerator, frequency up to 240 MHz, MPU, 300 DMIPS.
         </description>
 
-        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 5] DBGSTBY_D2, [ 4] DBGSTOP_D2,  [ 3] DBGSLEEP_D2
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
-          __var DbgMCU_APB3_Fz2  = 0x00000000;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
-          __var DbgMCU_APB1L_Fz2 = 0x00000000;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
-          __var DbgMCU_APB2_Fz2  = 0x00000000;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
-          __var DbgMCU_APB4_Fz2  = 0x00000000;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
+          __var DbgMCU_APB3_Fz2  = 0x00000040;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E00BFF;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
+          __var DbgMCU_APB1L_Fz2 = 0x00E00BFF;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
+          __var DbgMCU_APB2_Fz2  = 0x20070003;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x000C1E80;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
+          __var DbgMCU_APB4_Fz2  = 0x000C1E80;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -1727,7 +1717,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile Pname="CM4" define="STM32H747xG"/>
 
          <memory Pname="CM7" name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory Pname="CM4" name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+         <memory Pname="CM4" name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -1760,7 +1750,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile Pname="CM4" define="STM32H747xx"/>
 
          <memory Pname="CM7" name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory Pname="CM4" name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+         <memory Pname="CM4" name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
 
           <feature type="QFP" n="208"/>
         </device>
@@ -1824,8 +1814,8 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H757' Dual Core  ****************** -->
       <subFamily DsubFamily="STM32H757">
-        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="480000000"/>
-        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Dclock="240000000"/>
+        <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
+        <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H757_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H757_CM4.svd"/>
         <compile Pname="CM7" define="STM32H757xx" Pdefine="CORE_CM7"/>
@@ -1840,28 +1830,26 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           The STM32H757 devices are dual processor devices:
         </description>
         <description Pname="CM7">
-          32-bit Arm Cortex-M7 core with doubleprecision FPU and L1 cache: 16 Kbytes of data and 16 Kbytes of instruction cache;
-          frequency up to 480 MHz, MPU, 1027 DMIPS/2.14 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M7 core with DP-FPU, DSP, L1 cache, frequency up to 480 MHz, MPU, 1027 DMIPS.
         </description>
         <description Pname="CM4">
-          32-bit Arm 32-bit Cortex-M4 core with FPU, Adaptive real-time accelerator (ART Accelerator) for internal Flash memory and external memories,
-          frequency up to 240 MHz, MPU, 300 DMIPS/1.25 DMIPS/MHz (Dhrystone 2.1), and DSP instructions.
+          32-bit Arm Cortex-M4 core with FPU, DSP, ART Accelerator, frequency up to 240 MHz, MPU, 300 DMIPS.
         </description>
 
-        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H745_747_755_757.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 5] DBGSTBY_D2, [ 4] DBGSTOP_D2,  [ 3] DBGSLEEP_D2
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
-          __var DbgMCU_APB3_Fz2  = 0x00000000;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
-          __var DbgMCU_APB1L_Fz2 = 0x00000000;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
-          __var DbgMCU_APB2_Fz2  = 0x00000000;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
-          __var DbgMCU_APB4_Fz2  = 0x00000000;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU CPU1 APB3 peripheral freeze register
+          __var DbgMCU_APB3_Fz2  = 0x00000040;   // DBGMCU_APB3FZ2:  DBGMCU CPU2 APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E00BFF;   // DBGMCU_APB1LFZ1: DBGMCU CPU1 APB1L peripheral freeze register
+          __var DbgMCU_APB1L_Fz2 = 0x00E00BFF;   // DBGMCU_APB1LFZ2: DBGMCU CPU2 APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x20070003;   // DBGMCU_APB2FZ1:  DBGMCU CPU1 APB2 peripheral freeze register
+          __var DbgMCU_APB2_Fz2  = 0x20070003;   // DBGMCU_APB2FZ2:  DBGMCU CPU2 APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x000C1E80;   // DBGMCU_APB4FZ1:  DBGMCU CPU1 APB4 peripheral freeze register
+          __var DbgMCU_APB4_Fz2  = 0x000C1E80;   // DBGMCU_APB4FZ2:  DBGMCU CPU2 APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -1963,22 +1951,22 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H7A3'  **************************** -->
       <subFamily DsubFamily="STM32H7A3">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="280000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="280000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H7A3.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0455-stm32h7a37b3-and-stm32h7b0-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H7A3/B3 and STM32H7B0 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h7a3ai.pdf" title="STM32H7A3xI/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00040680;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -2035,7 +2023,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -2045,7 +2033,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -2055,7 +2043,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -2065,7 +2053,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -2075,7 +2063,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="216"/>
         </device>
@@ -2085,7 +2073,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="64"/>
         </device>
@@ -2095,7 +2083,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -2105,7 +2093,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -2115,7 +2103,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -2125,7 +2113,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -2135,7 +2123,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -2145,7 +2133,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -2155,7 +2143,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="CSP" n="132"/>
         </device>
@@ -2165,7 +2153,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="225"/>
         </device>
@@ -2175,7 +2163,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -2186,7 +2174,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -2196,7 +2184,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -2206,7 +2194,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="216"/>
         </device>
@@ -2216,7 +2204,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -2226,7 +2214,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -2236,7 +2224,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -2246,7 +2234,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -2256,7 +2244,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="64"/>
         </device>
@@ -2266,7 +2254,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="225"/>
         </device>
@@ -2276,7 +2264,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -2286,7 +2274,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -2296,7 +2284,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -2306,7 +2294,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -2316,7 +2304,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7A3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00080000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00080000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -2325,22 +2313,22 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H7B3'  **************************** -->
       <subFamily DsubFamily="STM32H7B3">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="280000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="280000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H7B3.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0455-stm32h7a37b3-and-stm32h7b0-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H7A3/B3 and STM32H7B0 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h7b3ri.pdf" title="STM32H7B3xI/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00040680;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -2397,7 +2385,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="169"/>
         </device>
@@ -2407,7 +2395,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="225"/>
         </device>
@@ -2417,7 +2405,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -2427,7 +2415,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="176"/>
         </device>
@@ -2437,7 +2425,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -2447,7 +2435,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="176"/>
         </device>
@@ -2457,7 +2445,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="216"/>
         </device>
@@ -2467,7 +2455,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="64"/>
         </device>
@@ -2477,7 +2465,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -2487,7 +2475,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="100"/>
         </device>
@@ -2497,7 +2485,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -2507,7 +2495,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="BGA" n="100"/>
         </device>
@@ -2517,7 +2505,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xx"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -2527,7 +2515,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="QFP" n="144"/>
         </device>
@@ -2537,7 +2525,7 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
           <compile define="STM32H7B3xxQ"/>
 
           <memory name="FLASH_Bank1" access="rx" start="0x08000000" size="0x00100000" default="1" startup="1"/>
-          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1" startup="1"/>
+          <memory name="FLASH_Bank2" access="rx" start="0x08100000" size="0x00100000" default="1"/>
 
           <feature type="CSP" n="132"/>
         </device>
@@ -2546,22 +2534,22 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H7B0'  **************************** -->
       <subFamily DsubFamily="STM32H7B0">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="280000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="280000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H7B0.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0455-stm32h7a37b3-and-stm32h7b0-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H7A3/B3 and STM32H7B0 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h7b0ab.pdf" title="STM32H7B0xB Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.0">
+        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x00E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00040680;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -2671,23 +2659,23 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H723'  **************************** -->
       <subFamily DsubFamily="STM32H723">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="550000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H723.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h723zg.pdf" title="STM32H723VE STM32H723VG STM32H723ZE STM32H723ZG Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB1H_Fz1 = 0x00000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x02E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB1H_Fz1 = 0x03000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -2814,23 +2802,23 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H733'  **************************** -->
       <subFamily DsubFamily="STM32H733">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="550000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H733.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h733vg.pdf" title="STM32H733VG STM32H733ZG Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB1H_Fz1 = 0x00000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x02E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB1H_Fz1 = 0x03000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -2923,23 +2911,23 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H725'  **************************** -->
       <subFamily DsubFamily="STM32H725">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="550000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H725.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h725ae.pdf" title="STM32H725xE/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB1H_Fz1 = 0x00000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x02E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB1H_Fz1 = 0x03000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -3133,23 +3121,23 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H735'  **************************** -->
       <subFamily DsubFamily="STM32H735">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="550000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H735.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h735zg.pdf" title="STM32H735xG Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB1H_Fz1 = 0x00000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x02E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB1H_Fz1 = 0x03000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
@@ -3280,23 +3268,23 @@ The STM32H7 series remains more than ever the microcontroller with an embedded F
 
       <!-- ************************  Subfamily 'STM32H730'  **************************** -->
       <subFamily DsubFamily="STM32H730">
-        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Dclock="550000000"/>
+        <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <debug svd="CMSIS/SVD/STM32H730.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h730ab.pdf" title="STM32H730AB STM32H730IB STM32H730VB STM32H730ZB Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.0">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
                                                  //                  [ 2] DBGSTBY_D1, [ 1] DBGSTOP_D1,  [ 0] DBGSLEEP_D1
-          __var DbgMCU_APB3_Fz1  = 0x00000000;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
-          __var DbgMCU_APB1L_Fz1 = 0x00000000;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
-          __var DbgMCU_APB1H_Fz1 = 0x00000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
-          __var DbgMCU_APB2_Fz1  = 0x00000000;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
-          __var DbgMCU_APB4_Fz1  = 0x00000000;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
+          __var DbgMCU_APB3_Fz1  = 0x00000040;   // DBGMCU_APB3FZ1:  DBGMCU APB3 peripheral freeze register
+          __var DbgMCU_APB1L_Fz1 = 0x02E003FF;   // DBGMCU_APB1LFZ1: DBGMCU APB1L peripheral freeze register
+          __var DbgMCU_APB1H_Fz1 = 0x03000000;   // DBGMCU_APB1HFZ1: DBGMCU APB1H peripheral freeze register
+          __var DbgMCU_APB2_Fz1  = 0x00070003;   // DBGMCU_APB2FZ1:  DBGMCU APB2 peripheral freeze register
+          __var DbgMCU_APB4_Fz1  = 0x00041E80;   // DBGMCU_APB4FZ1:  DBGMCU APB4 peripheral freeze register
 
           __var TraceClk_Pin     = 0x00040002;   // PE2
           __var TraceD0_Pin      = 0x00040003;   // PE3
