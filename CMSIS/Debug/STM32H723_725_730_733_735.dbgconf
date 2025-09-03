@@ -41,7 +41,7 @@ DbgMCU_APB3_Fz1 = 0x00000040;
 //   <o.1>  TIM3                     <i> TIM3 stop in debug
 //   <o.0>  TIM2                     <i> TIM2 stop in debug
 // </h>
-DbgMCU_APB1L_Fz1 = 0x02E003FF
+DbgMCU_APB1L_Fz1 = 0x02E003FF;
 
 // <h> DBGMCU APB1H peripheral freeze register (DBGMCU_APB1HFZ1)
 //                                   <i> Reserved bits must be kept at reset value
