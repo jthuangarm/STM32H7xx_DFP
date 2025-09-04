@@ -16,6 +16,7 @@
   <releases>
     <release version="4.1.2-dev">
       Active development ...
+      Updated debug configuration file (Corrected STM32H723_725_730_733_735.dbgconf)
     </release>
     <release version="3.1.1" date="2023-07-04">
       Board Support:
@@ -2661,7 +2662,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h723zg.pdf" title="STM32H723VE STM32H723VG STM32H723ZE STM32H723ZG Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.2">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -2804,7 +2805,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h733vg.pdf" title="STM32H733VG STM32H733ZG Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.2">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -2913,7 +2914,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h725ae.pdf" title="STM32H725xE/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.2">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -3123,7 +3124,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h735zg.pdf" title="STM32H735xG Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.2">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -3270,7 +3271,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <book name="https://www.st.com/resource/en/reference_manual/rm0468-stm32h723733-stm32h725735-and-stm32h730-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H723/733, STM32H725/735 and STM32H730 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h730ab.pdf" title="STM32H730AB STM32H730IB STM32H730VB STM32H730ZB Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.1">
+        <debugvars configfile="CMSIS/Debug/STM32H723_725_730_733_735.dbgconf" version="1.0.2">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
