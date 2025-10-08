@@ -603,11 +603,11 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <!-- ************************  Subfamily 'STM32H742'  **************************** -->
       <subFamily DsubFamily="STM32H742">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
-        <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <!-- Debug configuration settings -->
         <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
         <debug svd="CMSIS/SVD/STM32H742.svd"/>
         <compile define="STM32H742xx"/>
+        <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h743vi.pdf" title="STM32H742xI/G STM32H743xI/G Data Sheet"/>
 
@@ -1004,11 +1004,11 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <!-- ************************  Subfamily 'STM32H753'  **************************** -->
       <subFamily DsubFamily="STM32H753">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
-        <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <!-- Debug configuration settings -->
         <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
         <debug svd="CMSIS/SVD/STM32H753.svd"/>
         <compile define="STM32H753xx"/>
+        <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h753vi.pdf" title="STM32H753 Data Sheet"/>
 
@@ -1141,11 +1141,11 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <!-- ************************  Subfamily 'STM32H750'   *************************** -->
       <subFamily DsubFamily="STM32H750">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
-        <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <!-- Debug configuration settings -->
         <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
         <debug svd="CMSIS/SVD/STM32H750.svd"/>
         <compile define="STM32H750xx"/>
+        <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h750ib.pdf" title="STM32H750VB STM32H750IB STM32H750XB Data Sheet"/>
 
