@@ -604,14 +604,14 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H742">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H742_743_750_753.sdf"/>
         <debug svd="CMSIS/SVD/STM32H742.svd"/>
         <compile define="STM32H742xx"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h743vi.pdf" title="STM32H742xI/G STM32H743xI/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_750_753.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -805,14 +805,14 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H743">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H742_743_750_753.sdf"/>
         <debug svd="CMSIS/SVD/STM32H743.svd"/>
         <compile define="STM32H743xx"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h743vi.pdf" title="STM32H742xI/G STM32H743xI/G Data Sheet"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
-        
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
+
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_750_753.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -1005,14 +1005,14 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H753">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H742_743_750_753.sdf"/>
         <debug svd="CMSIS/SVD/STM32H753.svd"/>
         <compile define="STM32H753xx"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h753vi.pdf" title="STM32H753 Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_750_753.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -1142,14 +1142,14 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H750">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H742_743_753_750.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H742_743_750_753.sdf"/>
         <debug svd="CMSIS/SVD/STM32H750.svd"/>
         <compile define="STM32H750xx"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0433-stm32h742-stm32h743753-and-stm32h750-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H742, STM32H743/753 and STM32H750 Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h750ib.pdf" title="STM32H750VB STM32H750IB STM32H750XB Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H742_743_753_750.dbgconf" version="1.1.1">
+        <debugvars configfile="CMSIS/Debug/STM32H742_743_750_753.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -1249,7 +1249,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H745_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H745_CM4.svd"/>
         <compile Pname="CM7" Pdefine="CORE_CM7"/>
@@ -1457,7 +1457,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H755_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H755_CM4.svd"/>
         <compile Pname="CM7" define="STM32H755xx" Pdefine="CORE_CM7"/>
@@ -1596,7 +1596,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H747_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H747_CM4.svd"/>
         <compile Pname="CM7" Pdefine="CORE_CM7"/>
@@ -1794,7 +1794,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
         <processor Pname="CM7" Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="480000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <processor Pname="CM4" Dcore="Cortex-M4" DcoreVersion="r0p1" Dclock="240000000" Dmpu="MPU" Dfpu="SP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H745_747_755_757.sdf"/>
         <debug Pname="CM7"  __ap="0" svd="CMSIS/SVD/STM32H757_CM7.svd"/>
         <debug Pname="CM4"  __ap="3" svd="CMSIS/SVD/STM32H757_CM4.svd"/>
         <compile Pname="CM7" define="STM32H757xx" Pdefine="CORE_CM7"/>
@@ -1932,13 +1932,13 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H7A3">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="280000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H7A3_7B3_7B0.sdf"/>        
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H7A3_7B0_7B3.sdf"/>        
         <debug svd="CMSIS/SVD/STM32H7A3.svd"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0455-stm32h7a37b3-and-stm32h7b0-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H7A3/B3 and STM32H7B0 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h7a3ai.pdf" title="STM32H7A3xI/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.1">
+        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B0_7B3.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -2295,13 +2295,13 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H7B3">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="280000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H7A3_7B3_7B0.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H7A3_7B0_7B3.sdf"/>
         <debug svd="CMSIS/SVD/STM32H7B3.svd"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0455-stm32h7a37b3-and-stm32h7b0-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H7A3/B3 and STM32H7B0 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h7b3ri.pdf" title="STM32H7B3xI/G Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.1">
+        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B0_7B3.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -2517,13 +2517,13 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H7B0">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="280000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H7A3_7B3_7B0.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H7A3_7B0_7B3.sdf"/>
         <debug svd="CMSIS/SVD/STM32H7B0.svd"/>
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
         <book name="https://www.st.com/resource/en/reference_manual/rm0455-stm32h7a37b3-and-stm32h7b0-value-line-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" title="STM32H7A3/B3 and STM32H7B0 Value line Reference Manual"/>
         <book name="https://www.st.com/resource/en/datasheet/stm32h7b0ab.pdf" title="STM32H7B0xB Data Sheet"/>
 
-        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B3_7B0.dbgconf" version="1.1.1">
+        <debugvars configfile="CMSIS/Debug/STM32H7A3_7B0_7B3.dbgconf" version="1.1.1">
           // Default values for variables in debug sequences are configured with a *.dbgconf file in the user project
           __var DbgMCU_CR        = 0x00000007;   // DBGMCU_CR:       DBGMCU configuration register
                                                  //                  [ 8] DBGSTBY_D3, [ 7] DBGSTOP_D3
@@ -2643,7 +2643,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H723">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
         <debug svd="CMSIS/SVD/STM32H723.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
@@ -2788,7 +2788,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H733">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
         <debug svd="CMSIS/SVD/STM32H733.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
@@ -2899,7 +2899,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H725">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
         <debug svd="CMSIS/SVD/STM32H725.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
@@ -3111,7 +3111,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H735">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
         <debug svd="CMSIS/SVD/STM32H735.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
@@ -3260,7 +3260,7 @@ High-performance STM32H7 MCUs with Arm Cortex-M7 and Arm Cortex-M4 cores, MPU, L
       <subFamily DsubFamily="STM32H730">
         <processor Dcore="Cortex-M7" DcoreVersion="r0p1" Dclock="550000000" Dmpu="MPU" Dfpu="DP_FPU" Dendian="Little-endian" Ddsp="DSP"/>
         <!-- Debug configuration settings -->
-        <debugconfig default="swd" swj="true" clock="400000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
+        <debugconfig default="swd" swj="true" clock="5000000" sdf="CMSIS/Debug/STM32H723_725_730_733_735.sdf"/>
         <debug svd="CMSIS/SVD/STM32H730.svd"/>
 
         <book name="https://developer.arm.com/documentation/dui0646/latest" title="Cortex-M7 Generic User Guide"/>
